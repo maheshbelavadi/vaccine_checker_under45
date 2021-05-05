@@ -39,10 +39,10 @@ This script will check for vaccine availability and print it when available, opt
 
 
 * Edit the twilio paramaetrs in the script:
-    * Set the sid ```account_sid``` in line 7 
-    * Set the token```auth_token``` in line 8
-    * Set the twilio phone number ```account_phone_number``` in line 9
-    * Set the callback phone number ```phone_number_to_call``` in line 10
+    * Set the sid ```account_sid``` in line 8 
+    * Set the token```auth_token``` in line 9
+    * Set the twilio phone number ```account_phone_number``` in line 10
+    * Set the callback phone number ```phone_number_to_call``` in line 11
 
 * Edit the arealist/pincode to monitor:
     * Add all the area paths you wish to monitor in line 18.
@@ -54,4 +54,5 @@ This script will check for vaccine availability and print it when available, opt
     python vaccine_checker.py
     ```
 
+If you plan to improve this script, feel free to create a PR (few wishlist: parameterize all values, avoid repeated calls)
 ##### And if you like this script, do give a star to this repo (on the top right corner on this page)
