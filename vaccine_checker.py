@@ -77,8 +77,8 @@ def callme(message):
         print('Cannot call back. Incorrect Twilio configuration. Refer readme')
 
 
-check_vaccine_availability()
-#schedule.every(180).seconds.do(check_vaccine_availability)
+#check_vaccine_availability()
+schedule.every(180).seconds.do(check_vaccine_availability)
 print('Vaccine monitoring started.')
 while True:
     schedule.run_pending()
