@@ -1,1 +1,55 @@
-# vaccine_checker_under45
+# Under 45 vaccine availability checker
+
+This script will check for vaccine availability and print it when available, optionally will give you a callback as well.
+
+### Running this script
+
+#### Pre-requisites
+* [python 3.x](https://www.python.org/downloads/)
+* [Twilio](https://www.twilio.com/) (only if you need a call back).
+
+#### Running the script
+
+##### Simple mode (Without callback)
+* Open command prompt and install all required modules.
+    ```sh
+    pip install -r .\requirements.txt
+    ```
+
+* Edit the arealist/pincode to monitor in the script:
+    * Add all the area paths you wish to monitor in line 18.
+(Refer line 14 and 15 to get the area path)
+    * Add all the pincode you wish to monitor in line 19.
+
+* Run the script.
+    ```sh
+    python vaccine_checker.py
+    ```
+
+##### Alert mode (with callback)
+* Open command prompt and install all required modules.
+    ```sh
+    pip install -r .\requirements.txt
+    ```
+
+* Create a twilio account and get the following:
+    * Get a [twilio phone number](https://www.twilio.com/docs/voice/quickstart/python)
+    * Get account sid and auth token by [referring this](https://www.twilio.com/docs/voice/quickstart/python?code-sample=code-make-a-phone-call-using-twilio&code-language=Python&code-sdk-version=6.x#replace-the-placeholder-credential-values)
+    * Setup a number where want to get a callback by adding it to [verified numbers](https://www.twilio.com/console/phone-numbers/verified)
+
+
+* Edit the twilio paramaetrs in the script:
+    * Set the sid ```account_sid``` in line 7 
+    * Set the token```auth_token``` in line 8
+    * Set the twilio phone number ```account_phone_number``` in line 9
+    * Set the callback phone number ```phone_number_to_call``` in line 10
+
+* Edit the arealist/pincode to monitor:
+    * Add all the area paths you wish to monitor in line 18.
+(Refer line 14 and 15 to get the area path)
+    * Add all the pincode you wish to monitor in line 19.
+
+* Run the script.
+    ```sh
+    python vaccine_checker.py
+    ```
