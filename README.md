@@ -53,3 +53,5 @@ This script will check for vaccine availability and print it when available, opt
     ```sh
     python vaccine_checker.py
     ```
+
+##### And if you like this script, do give a star to this repo (on the top right corner on this page)
