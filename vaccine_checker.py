@@ -15,6 +15,9 @@ phone_number_to_call = '<your number here>'
 # 2) Get the area code from https://cdn-api.co-vin.in/api/v2/admin/location/districts/<state code>
 # '265' = Bangalore Urban
 # '294' = BBMP
+# NOTE: By adding area code you will get a call for anywhere in the city. 
+#       Better to use only pincode to restrice the search for limited set 
+#       of areas in a large city like Bangalore, Mumbai etc 
 areacodes = ['265', '294']
 pincodes = ['560078', '570017']
 
@@ -25,11 +28,10 @@ def check_vaccine_availability():
         for pin in pincodes:
             query_cowin(pin, True)
     except:
-        print("Something went wrok. But I am still alive.")
+        print("Something went wrong. But I am still alive.")
 
 
 def query_cowin(code, is_pincode):
-    print("Checking vaccine for {}".format(code))
     date_to_check = (datetime.today() + timedelta(days=1)).strftime('%d-%m-%Y')
     query_url = 'api/v2/appointment/sessions/public/calendarByDistrict?district_id'
     if is_pincode:
@@ -47,20 +49,20 @@ def check_availability(code, vaccine_center_list):
         if 'sessions' in center:
             for session in center['sessions']:
                 if(session['available_capacity'] > 0 and session['min_age_limit'] < 45):
-                    print('{} Yeppi vaccine available :). Search code: {}, {}, {}, {}, {}'.format(
+                    print('{} Yeppi vaccine available :) for {}. Search code: {}, {}, {}, {}, {}'.format(
                         datetime.now().strftime("%m/%d/%Y, %H:%M:%S"),
+                        session['date'],
                         code,
                         session['available_capacity'],
                         session['vaccine'],
                         center['name'],
                         center['address']))
-                    callme('We have found {} {} vaccine available at {}, {}'.format(
-                        session['available_capacity'],
-                        session['vaccine'],
-                        center['name'],
-                        center['address']))
-                    return
-    print('No vaccine yet :(')
+                    if(session['available_capacity'] > 10):
+                        callme('We have found {} {} vaccine available at {}, {}'.format(
+                            session['available_capacity'],
+                            session['vaccine'],
+                            center['name'],
+                            center['address']))
 
 
 def callme(message):
@@ -78,7 +80,7 @@ def callme(message):
 
 
 #check_vaccine_availability()
-schedule.every(180).seconds.do(check_vaccine_availability)
+schedule.every(15).seconds.do(check_vaccine_availability)
 print('Vaccine monitoring started.')
 while True:
     schedule.run_pending()

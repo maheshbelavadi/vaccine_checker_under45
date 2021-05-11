@@ -1,6 +1,6 @@
 # Under 45 vaccine availability checker
 
-This script will check for vaccine availability and print it when available, optionally will give you a callback as well.
+This script will check for vaccine availability and print it when available, optionally will give you a callback as well (_Only when there are more than 10 free slots availabile_).
 
 ### Running this script
 
@@ -39,15 +39,15 @@ This script will check for vaccine availability and print it when available, opt
 
 
 * Edit the twilio paramaetrs in the script:
-    * Set the sid ```account_sid``` in line 8 
+    * Set the sid ```account_sid``` in line 8
     * Set the token```auth_token``` in line 9
     * Set the twilio phone number ```account_phone_number``` in line 10
     * Set the callback phone number ```phone_number_to_call``` in line 11
 
 * Edit the arealist/pincode to monitor:
-    * Add all the area paths you wish to monitor in line 18.
+    * Add all the area paths you wish to monitor in line 21.
 (Refer line 14 and 15 to get the area path)
-    * Add all the pincode you wish to monitor in line 19.
+    * Add all the pincode you wish to monitor in line 22.
 
 * Run the script.
     ```sh
