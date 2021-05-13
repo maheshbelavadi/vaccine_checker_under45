@@ -32,7 +32,7 @@ This script will check for vaccine availability and print it when available, opt
     pip install -r .\requirements.txt
     ```
 
-* Create a twilio account and get the following:
+* Create a twilio account and get the following (Register using this link www.twilio.com/referral/Cx4z0S): 
     * Get a [twilio phone number](https://www.twilio.com/docs/voice/quickstart/python)
     * Get account sid and auth token by [referring this](https://www.twilio.com/docs/voice/quickstart/python?code-sample=code-make-a-phone-call-using-twilio&code-language=Python&code-sdk-version=6.x#replace-the-placeholder-credential-values)
     * Setup a number where want to get a callback by adding it to [verified numbers](https://www.twilio.com/console/phone-numbers/verified)
