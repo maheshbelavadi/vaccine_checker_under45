@@ -4,11 +4,56 @@ import schedule
 import requests
 import re
 from twilio.rest import Client
+import urllib.request
+from urllib.request import Request, urlopen
+import json
+import sys
 
 account_sid = '<twilio sid here>'
 auth_token = '<auth token here>'
 account_phone_number = '<twilio number here>'
 phone_number_to_call = '<your number here>'
+
+choice = input('''Please select to below search option
+Enter 0 : To search using area code
+Enter 1 : To search using pincodes: \n''')
+
+if choice == '0':
+    
+    state_code_link = "https://cdn-api.co-vin.in/api/v2/admin/location/states"
+    state_name = input('Please enter the name of state:\n')
+    try:
+        with urllib.request.urlopen(Request(state_code_link, headers={'User-Agent': 'Mozilla/5.0'})) as url:
+            data = json.loads(url.read())['states']
+            for item in data:
+                if item['state_name'].lower() == state_name.lower().strip():
+                    state_code = item['state_id']
+                    break
+    except:
+        state_code = input('Auto state-code fetch not working, please refer the following link for state-code:\n'+ area_codes_link)
+
+    area_codes_link = 'https://cdn-api.co-vin.in/api/v2/admin/location/districts/' + str(state_code)
+    try:
+        with urllib.request.urlopen(Request(area_codes_link, headers={'User-Agent': 'Mozilla/5.0'})) as url:    
+            data = json.loads(url.read())['districts']
+            for district in data:
+                temp = list(district.values())
+                print(f'{temp[1]:<30} {temp[0]:>5}')
+                print(f'-'*40)
+    except:
+        print('Auto area-code fetch not working, please refer the following link for area-codes:\n'+ area_codes_link)
+    input_codes = input('Please enter the area-codes seperated by comma(,): \n')
+    input_codes = input_codes.split(',')
+    area_codes = [(code.strip()) for code in input_codes]
+
+elif choice == '1':
+    input_codes = input('Please enter the pin-codes seperated by comma(,): \n')
+    input_codes = input_codes.split(',')
+    pin_codes = [(code.strip()) for code in input_codes]
+
+else:
+    print('Enter valid choice: 0 or 1.')
+    sys.exit()
 
 # T0 get the area code:
 # 1) Get the state code under https://cdn-api.co-vin.in/api/v2/admin/location/states
@@ -18,8 +63,6 @@ phone_number_to_call = '<your number here>'
 # NOTE: By adding area code you will get a call for anywhere in the city. 
 #       Better to use only pincode to restrice the search for limited set 
 #       of areas in a large city like Bangalore, Mumbai etc 
-areacodes = ['265', '294']
-pincodes = ['560078', '570017']
 
 def check_vaccine_availability():
     try:
